@@ -1,0 +1,281 @@
+/* Modern design system variables with softer, more accessible colors */
+:root {
+  --primary: #6D28D9; /* A softer purple */
+  --primary-hover: #8B5CF6; /* Lighter purple for hover states */
+  --success: #059669; /* A softer green */
+  --error: #DC2626; /* A softer red */
+  --background: #F9FAFB; /* Very light gray for background */
+  --foreground: #1F2937; /* Dark gray for text */
+  --muted: #6B7280; /* Gray for muted text */
+  --card: #FFFFFF; /* White for cards */
+  --card-foreground: #1F2937; /* Dark gray for card text */
+  --border: #E5E7EB; /* Light gray for borders */
+  --ring: rgba(109, 40, 217, 0.1); /* Soft purple for focus rings */
+
+  --gradient-1: linear-gradient(135deg, #6D28D9, #8B5CF6); /* Purple gradient */
+  --gradient-2: linear-gradient(135deg, #059669, #10B981); /* Green gradient */
+  --gradient-error: linear-gradient(135deg, #DC2626, #EF4444); /* Red gradient */
+
+  --radius: 1rem; /* Consistent border radius */
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 
+            0 2px 4px -2px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 
+               0 4px 6px -4px rgba(0, 0, 0, 0.05); /* Larger shadow */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary: #8B5CF6;
+    --primary-hover: #A78BFA;
+    --success: #10B981;
+    --error: #EF4444;
+    --background: #111827; /* Dark background */
+    --foreground: #F9FAFB; /* Light text */
+    --muted: #9CA3AF; /* Muted text */
+    --card: #1F2937; /* Dark card background */
+    --card-foreground: #F9FAFB; /* Light card text */
+    --border: #374151; /* Dark border */
+    --ring: rgba(139, 92, 246, 0.1); /* Soft purple for focus rings */
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  background-color: var(--background);
+  color: var(--foreground);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Container Layout */
+.container {
+  max-width: 800px;
+  margin: 3rem auto;
+  padding: 2rem;
+}
+
+/* Input Form */
+.input-form {
+  background-color: var(--card);
+  border-radius: var(--radius);
+  padding: 2rem;
+  box-shadow: var(--shadow-lg);
+  margin-bottom: 2.5rem;
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--border);
+}
+
+textarea {
+  width: 100%;
+  height: 50px;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) - 0.25rem);
+  background-color: transparent;
+  color: var(--foreground);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  resize: vertical;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px var(--ring);
+}
+
+/* Error Display */
+#error {
+  color: var(--error);
+  font-size: 0.9375rem;
+  margin-top: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+}
+
+/* Output Section */
+.output-form {
+  background-color: var(--card);
+  border-radius: var(--radius);
+  padding: 2rem;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border);
+}
+
+#title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  text-align: center;
+  background: var(--gradient-1);
+  -webkit-background-clip: text;
+  color: transparent;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.025em;
+}
+
+#questions-number {
+  text-align: center;
+  color: var(--muted);
+  margin-bottom: 2.5rem;
+  font-size: 1.125rem;
+}
+
+/* Question Styling */
+.question {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.question::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--gradient-1);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.question:hover::before {
+  opacity: 1;
+}
+
+.question h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: var(--foreground);
+  letter-spacing: -0.015em;
+}
+
+/* Options Styling */
+.question ul {
+  list-style: none;
+  padding: 0;
+}
+
+.question li {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) - 0.25rem);
+  margin-bottom: 1rem;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  background-color: var(--card);
+  position: relative;
+  overflow: hidden;
+}
+
+.question li:hover:not(.disabled) {
+  border-color: var(--primary);
+  transform: translateX(4px);
+}
+
+.question li:hover:not(.disabled)::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(109, 40, 217, 0.1), rgba(139, 92, 246, 0.1));
+  pointer-events: none;
+}
+
+
+
+
+/* Radio Buttons */
+input[type="radio"] {
+  appearance: none;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 2px solid var(--muted);
+  border-radius: 50%;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+input[type="radio"]:checked {
+  border-color: var(--primary);
+  background: var(--gradient-1);
+  background-image: radial-gradient(circle, white 35%, transparent 36%);
+}
+
+input[type="radio"]:focus {
+  box-shadow: 0 0 0 4px var(--ring);
+}
+
+/* Correct/Incorrect States */
+.question li.correct {
+  background: linear-gradient(135deg, rgba(5, 150, 105, 0.1), rgba(16, 185, 129, 0.1));
+  border-color: var(--success);
+  animation: correct 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.question li.incorrect {
+  background: linear-gradient(135deg, rgba(220, 38, 38, 0.1), rgba(239, 68, 68, 0.1));
+  border-color: var(--error);
+  animation: shake 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.question li.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Animations */
+@keyframes correct {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+  .container {
+    padding: 1rem;
+    margin: 1rem;
+  }
+  
+  .input-form,
+  .output-form,
+  .question {
+    padding: 1.5rem;
+  }
+  
+  #title {
+    font-size: 1.75rem;
+  }
+  
+  .question li {
+    padding: 0.875rem;
+  }
+}
