@@ -10,17 +10,17 @@ Here is the json template you could use for your AI prompt.
 
 ```json
 {
-  title: "My Quiz",
-  questions: [
+  "title": "My Quiz",
+  "questions": [
     {
-      title: "What is 1+1?",
-      options: [
-        { id: 1, value: "1" }
-        { id: 2, value: "2" }
-        { id: 3, value: "3" }
-        { id: 4, value: "4" }
+      "title": "What is 1+1?",
+      "options": [
+        { "id": 1, "value": "one" },
+        { "id": 2, "value": "two" },
+        { "id": 3, "value": "three" },
+        { "id": 4, "value": "four" }
       ],
-      answer: 2
+      "answer": 2
     }
     ....
   ]
